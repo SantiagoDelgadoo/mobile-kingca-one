@@ -10,7 +10,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { base_url } from "../api/url";
 import axios from "axios";
-
+import CardEvent from "../components/CardEvent";
 export default function DetailsHotel(props) {
   let [hotel, setHotels] = useState([]);
   let id = props.route.params;
@@ -21,6 +21,13 @@ export default function DetailsHotel(props) {
     }
     captureHotel();
   }, []);
+  let [events, setEvents] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${base_url}/show?hotelId=${id}`)
+      .then((response) => setEvents(response.data.id));
+  }, []);
+
   const image = {
     uri: "https://4.bp.blogspot.com/-VU07ON0BdWg/Vgk6UCLVN8I/AAAAAAAAEsg/3-i03zAHqmo/s1600/20467__940x_keemala-tree-house-with-pool-hr.jpg",
   };
@@ -35,7 +42,7 @@ export default function DetailsHotel(props) {
         <View style={styles.containerCards}>
           <Image
             style={styles.cardImg}
-            source={{ uri: hotel.photo[0] }}
+            source={{ uri: hotel.photo}}
             key={hotel.id}
           />
           <View style={styles.containerDescription}>
@@ -48,13 +55,27 @@ export default function DetailsHotel(props) {
           </View>
         </View>
       </ImageBackground>
+      <View style={styles.containerCardEvents}>
+      {events.map((event) => {
+        return (
+        <CardEvent event={event} ></CardEvent>
+        );
+      })}
+      </View>
     </ScrollView>
   );
 }
 const styles = StyleSheet.create({
+  containerCardEvents:{
+    width:"100%",
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+  },
   containerCityHotels: {
     display: "flex",
     width: "100%",
+    alignContent:"center",
     backgroundColor: "#2b3133",
   },
   imagefondo: {
@@ -63,7 +84,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
     marginBottom:40,
-    color: "rgba(0,0,0,.606)",
   },
   containerCards: {
     display: "flex",

@@ -46,7 +46,7 @@ export default function CardHotels(props) {
             </Text>
             <Image
               style={styles.cardImg}
-              source={{ uri: place.photo[0] }}
+              source={{ uri: place.photo[0]}}
               key={place.id}
             />
             <View key={place.id} style={
