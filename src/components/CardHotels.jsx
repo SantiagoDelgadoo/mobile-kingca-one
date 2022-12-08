@@ -5,7 +5,8 @@ import hotelsAction from "../redux/actions/hotelsAction";
 import { View, Text } from "react-native";
 import { StyleSheet, Image, Pressable, TextInput } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-export default function CardHotels() {
+
+export default function CardHotels(props) {
   let [data, setData] = useState({ name: "", order: "ASC" });
   const listFiltered = useSelector((store) => store.hotelsReducer.listFiltered);
   const dispatch = useDispatch();
@@ -48,19 +49,19 @@ export default function CardHotels() {
               source={{ uri: place.photo[0] }}
               key={place.id}
             />
-            <View key={place.id}                 style={
+            <View key={place.id} style={
                   styles.viewDetailsCities
                 }>
               <Pressable
                 style={
                   styles.buttonDetailsCities
-                } /*  onPress={() => props.props.navigate("Details Hotel", place._id)} */
+                }  onPress={() => props.navigation.navigate('DetailsHotel', place._id)}
                 key={place.id}
               >
                 <Text style={styles.tituloDetails} key={place.id}>
                   Details
                 </Text>
-              </Pressable>
+              </Pressable> 
             </View>
           </View>
         );
