@@ -15,7 +15,7 @@ export default function CardCity(props) {
       <View>
         <Button style={styles.buttonCities}
           color="#ea5318"
-         /*  onPress={() => props.props.navigate("Details City", cities._id)} */
+          onPress={() => props.props.navigate("DetailsCity", cities._id)} 
           title="More details"
         />
       </View>
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     imagefondo: {
         height: 300,
         width: 300,
-        
     },
     textoCard:{
         borderTopLeftRadius: 12,
