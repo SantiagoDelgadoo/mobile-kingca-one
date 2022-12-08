@@ -13,10 +13,7 @@
     "@react-navigation/native": "^6.0.16",
     "@react-navigation/native-stack": "^6.9.4",
     "@reduxjs/toolkit": "^1.9.1",
-<<<<<<< HEAD
-=======
     "axios": "^1.2.1",
->>>>>>> 481385359819be7352fb9ee2b74510ed80ec0ec8
     "expo": "~47.0.8",
     "expo-status-bar": "~1.4.2",
     "react": "18.1.0",
