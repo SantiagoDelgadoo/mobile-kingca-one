@@ -48,7 +48,9 @@ export default function CardHotels() {
               source={{ uri: place.photo[0] }}
               key={place.id}
             />
-            <View key={place.id}>
+            <View key={place.id}                 style={
+                  styles.viewDetailsCities
+                }>
               <Pressable
                 style={
                   styles.buttonDetailsCities
@@ -71,8 +73,9 @@ const styles = StyleSheet.create({
   containerCards: {
     display: "flex",
     justifyContent: "center",
+    alignSelf:"center",
     alignItems: "center",
-    width: "100%",
+    width: "90%",
     height: 360,
     backgroundColor: "white",
     color: "black",
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   buttonDetailsCities: {
-    width: 350,
+    width: "100%",
     height: 50,
     backgroundColor: "#ea5318",
     border: "none",
@@ -108,6 +111,9 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
   },
+  viewDetailsCities:{
+    width: "100%",
+  },
   tituloDetails: {
     color: "white",
     textDecoration: "none",
@@ -116,6 +122,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputHotels: {
+    width:"90%",
+    alignSelf:"center",
     fontSize: 15,
     borderWidth: 2,
     borderColor: "#ea5318",
