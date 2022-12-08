@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import citiesAction from '../redux/actions/citiesAction';
 import Footer from '../components/Footer';
 
-export default function Cities() {
+export default function Cities(props) {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const citiesFiltered = useSelector((store) => store.citiesReducer.listCities);
@@ -34,7 +34,7 @@ export default function Cities() {
           />
       </View>
       <View style={styles.containerCardsCities}>
-      {citiesFiltered.map(city=><CardCity cities={city}></CardCity>)}
+      {citiesFiltered.map(city=><CardCity props={props.navigation} cities={city}></CardCity>)}
       </View>
       <Footer></Footer>
     </ScrollView>
