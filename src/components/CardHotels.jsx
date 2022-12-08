@@ -1,35 +1,37 @@
 import React from "react";
-/* import { useState, useEffect } from "react"; */
+import { useState, useEffect } from "react";
 /* import SearchBar from "./FormText"; */
 /* import { Link as NavLink } from "react-router-dom"; */
-/* import { useDispatch, useSelector } from "react-redux";
-import hotelsAction from "../redux/actions/hotelsAction"; */
+import { useDispatch, useSelector } from "react-redux";
+import hotelsAction from "../redux/actions/hotelsAction";
 import { View, Text } from "react-native";
-import { StyleSheet, Image, Pressable } from "react-native";
-import data from "../data/places";
+import { StyleSheet, Image, Pressable, TextInput } from "react-native";
 
 export default function CardHotels() {
-  let hotels = data;
-  /*   let [data, setData] = useState({ name: "", order: "" });
+   let [data, setData] = useState({ name: "", order: "" });
   const listFiltered = useSelector((store) => store.hotelsReducer.listFiltered);
   const dispatch = useDispatch();
-  let inputSearch = (event) => {
-    setData({ ...data, name: event.target.value });
+/*   let inputSearch = (event) => {
+    setData({ ...data, name: event.value });
   };
+ */
 
   let inputOrder = (event) => {
-    setData({ ...data, order: event.target.value });
+    setData({ ...data, order: event.target });
   };
   useEffect(() => {
     dispatch(hotelsAction.filterHotels(data));
-  }, [data]); */
+    console.log(data);
+  }, [data]);
   return (
     <>
-      {/*       <View className="filters">
+      <View className="filters">
         <View>
-           <SearchBar onChange={inputSearch} /> 
+           <TextInput style={styles.inputHotels} onChange={(newText) => setData({ ...data, name: newText })}
+            type="search"
+            placeholder="Search Hotel" /> 
         </View>
-        <View>
+{/*         <View>
            <form action="" className="filter-select">
             <select onChange={inputOrder}>
               <option value="">Choose an option</option>
@@ -37,21 +39,21 @@ export default function CardHotels() {
               <option value="DESC">Descending order</option>
             </select>
           </form> 
-        </View>
-      </View> */}
+        </View> */}
+      </View> 
 
-      {hotels.map((place) => {
+      {listFiltered.map((place) => {
         return (
           <View style={styles.containerCards} key={place.id}>
-            <Image style={styles.cardImg} source={{ uri: place.photo[0] }} />
             <Text style={styles.subtituloCitiesCard}>{place.name}</Text>
+            <Image style={styles.cardImg} source={{ uri: place.photo[0] }} />
             <View>
               <Pressable
                 style={
                   styles.buttonDetailsCities
                 } /*  onPress={() => props.props.navigate("Details Hotel", place._id)} */
               >
-                <Text style={styles.tituloDetails}>Deatils</Text>
+                <Text style={styles.tituloDetails}>Details</Text>
               </Pressable>
             </View>
           </View>
@@ -81,15 +83,15 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#2020209d",
     padding: 10,
+    borderTopRightRadius:30,
+    borderTopLeftRadius:30,
   },
   cardImg: {
     width: "100%",
-    resizeMode: "contain",
+    resizeMode: "cover",
     height: "50%",
     width: "100%",
     flexGrow: 1,
-    borderTopRightRadius:30,
-    borderTopLeftRadius:30,
   },
   buttonDetailsCities: {
     width: 350,
@@ -109,5 +111,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     justifyContent: "center",
+  },
+  inputHotels: {
+    fontSize: 15,
+    borderWidth: 2,
+    borderColor: '#ea5318',
+    padding: 8,
+    borderRadius: 8,
+    marginBottom:20,
+    backgroundColor:"white",
   },
 });

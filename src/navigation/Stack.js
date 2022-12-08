@@ -11,8 +11,6 @@ export default function Stack() {
     <StackNav.Navigator>
         <StackNav.Screen name= "Hotel" component={Hotel}/>
         <StackNav.Screen name="Home" component={Home} />
-      
-
     </StackNav.Navigator>
   )
 }
