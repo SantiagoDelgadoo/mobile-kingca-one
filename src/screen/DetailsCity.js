@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { base_url } from '../api/url';
 import Footer from "../components/Footer";
+import CardItineraries from "../components/CardItineraries";
 
 export default function DetailsCity(props) {
   console.log(props.route.params);
@@ -15,6 +16,14 @@ export default function DetailsCity(props) {
   useEffect(() => {
     petition()
   }, [])
+
+  let [itineraris,setItineraris] = useState([])
+  useEffect(()=>{
+    axios.get(`${base_url}itinerary?cityId=${props.route.params}`)
+    .then((response)=>setItineraris(response.data.id))
+  },[])
+  
+
   const image = { uri: "https://cdn.discordapp.com/attachments/1032383580590055512/1050508309796495440/img-camellos.jpg" };
   return (
     <ScrollView>
@@ -31,6 +40,7 @@ export default function DetailsCity(props) {
       </View>  
     </View>
     </ImageBackground>
+    {itineraris.map(itinerary=><CardItineraries object={itinerary} key={itinerary.name}></CardItineraries>)}
     <Footer></Footer>
     </ScrollView>
   )
