@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 import { base_url } from '../api/url';
 
-export default function SignUp() {
+export default function SignUp(props) {
     const [datosOfNewUser, setDatosOfNewUser] = useState({
         name: "",
         lastName: "",
@@ -72,7 +72,7 @@ export default function SignUp() {
                         </View>
                         <View>
                             <Text style={styles.segundoTexto} ><Text style={styles.lineOrange}>|</Text> Already have an account?</Text>
-                            <Button title='Sign in with account' color='#ea5318'></Button>
+                            <Button onPress={()=>props.navigation.navigate("SignIn")} title='Sign in with account' color='#ea5318'></Button>
                         </View>
                     </View>
                 </View>
