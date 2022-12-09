@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import CardHotels from "../components/CardHotels";
+import Footer from "../components/Footer";
 export default function Hotels(props) {
   const image = {
     uri: "https://www.negociosypymes.com/wp-content/uploads/2021/05/hotel-estrellas-cartel-1200x600.jpg",
@@ -27,6 +28,7 @@ export default function Hotels(props) {
           </View>
         </ImageBackground>
         <CardHotels navigation={props.navigation} ></CardHotels>
+        <Footer></Footer>
       </ScrollView>
     </>
   );

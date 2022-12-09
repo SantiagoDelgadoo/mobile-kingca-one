@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { base_url } from "../api/url";
 import axios from "axios";
 import CardEvent from "../components/CardEvent";
+import Footer from "../components/Footer";
 export default function DetailsHotel(props) {
   let [hotel, setHotels] = useState([]);
   let id = props.route.params;
@@ -62,6 +63,7 @@ export default function DetailsHotel(props) {
         );
       })}
       </View>
+      <Footer></Footer>
     </ScrollView>
   );
 }
