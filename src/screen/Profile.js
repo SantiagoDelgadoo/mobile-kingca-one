@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Button, Alert, } from 'react-native'
+import { View, Text, StyleSheet, Image, Button, Alert,Pressable } from 'react-native'
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from '../components/Footer'
@@ -7,24 +7,24 @@ import userActions from '../redux/actions/userActions'
 import FormProfile from '../components/FormProfile'
 
 export default function Profile() {
-    let { name, lname, user, logged, id, role, photo, token , age,email} =
-    useSelector((store) => store.userReducer)
+    let { name, lname, user, logged, id, role, photo, token, age, email } =
+        useSelector((store) => store.userReducer)
 
     const { reIngress } = userActions;
     const dispatch = useDispatch();
     async function getToken() {
-      try {
-        let token = await AsyncStorage.getItem("token");
-        token = JSON.parse(token);
-        if (token) {
-          dispatch(reIngress(token.token.user));
+        try {
+            let token = await AsyncStorage.getItem("token");
+            token = JSON.parse(token);
+            if (token) {
+                dispatch(reIngress(token.token.user));
+            }
+        } catch (error) {
+            console.log(error.message);
         }
-      } catch (error) {
-        console.log(error.message);
-      }
     }
     React.useEffect(() => {
-      getToken();
+        getToken();
     }, []);
     const { Logout, getUser } = userActions
     useEffect(() => {
@@ -32,7 +32,7 @@ export default function Profile() {
     }, []
     )
     console.log(id);
-    const desconect = async () => {
+    async function desconect () {
         await dispatch(Logout(token))
         Alert.alert('Bye, see you later')
     }
@@ -48,18 +48,21 @@ export default function Profile() {
                 />
                 <View style={styles.containerTextProfile}>
                     <Text>
-                    <Text style={styles.textCapacity}>Name: </Text>{name}
+                        <Text style={styles.textCapacity}>Name: </Text>{name}
                     </Text>
                     <Text>
-                    <Text style={styles.textCapacity}>LastName: </Text>{lname}
+                        <Text style={styles.textCapacity}>LastName: </Text>{lname}
                     </Text>
                     <Text>
-                    <Text style={styles.textCapacity}>Age: </Text>{age}
+                        <Text style={styles.textCapacity}>Age: </Text>{age}
                     </Text>
                     <Text>
-                    <Text style={styles.textCapacity}>Email: </Text>{email}
+                        <Text style={styles.textCapacity}>Email: </Text>{email}
                     </Text>
                 </View>
+                <Pressable style={styles.ButtonDetails} onPress={desconect}>
+                    <Text style={styles.textoBoton}>Logout</Text>
+                </Pressable>
             </View>
             <FormProfile></FormProfile>
             <Footer></Footer>
@@ -67,9 +70,23 @@ export default function Profile() {
     )
 }
 const styles = StyleSheet.create({
+    ButtonDetails: {
+        backgroundColor: "#ea5318",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: 250,
+        height: 40,
+        borderRadius: 10,
+        textAlign: "center",
+    },
+    textoBoton: {
+        color: "white",
+        fontWeight: "800",
+    },
     textCapacity: {
         fontWeight: "800",
-      },
+    },
     containerProfile: {
         height: 595,
         display: 'flex',
@@ -86,7 +103,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
     },
-    containerTextProfile:{
+    containerTextProfile: {
         marginVertical: 20,
     },
     textProfile: {

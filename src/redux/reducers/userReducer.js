@@ -60,7 +60,6 @@ const userReducer = createReducer(initialState, (builder) => {
         }
       }
       removeToken();
-      localStorage.removeItem('token');
       let newState = {...state,
         id: "",
         name: "",

@@ -34,12 +34,12 @@ export default function Drawer() {
     }, []);
   return (
     <DrawerNav.Navigator initialRouteName="Home">
-      <DrawerNav.Screen name="Home" component={Home} />
+     <DrawerNav.Screen name="Home" component={Home} />
       <DrawerNav.Screen name="Cities" component={Stack2} />
       <DrawerNav.Screen name="Hotels" component={Stack} />
-      <DrawerNav.Screen name="SignIn" component={SignIn}/>
-      <DrawerNav.Screen name="SignUp" component={SignUp} />
-      <DrawerNav.Screen name="Profile" component={Profile} />
+      {!logged? (<DrawerNav.Screen name="SignIn" component={SignIn}/>):null}
+      {!logged? (<DrawerNav.Screen name="SignUp" component={SignUp} />):null}
+      {logged?  (<DrawerNav.Screen name="Profile" component={Profile} />):null}
     </DrawerNav.Navigator>
   );
 }

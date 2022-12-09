@@ -28,7 +28,7 @@ export default function SignIn(props) {
   async function entry() {
     let res = await dispatch(login(user));
       if (res.payload.success) {
-      Alert.alert(`Welcome again ${res.payload.response.response.user.name}`);
+      Alert.alert(`Welcome again  ${res.payload.response.response.user.name}`);
       props.navigation.navigate("Home");
     } else {
       Alert.alert(`${res.data.message[0]} or password!`);
