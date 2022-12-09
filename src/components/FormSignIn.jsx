@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import userActions from "../redux/actions/userActions";
+import axios from "axios";
+import { base_url } from "../api/url";
 import {
   View,
   Text,
@@ -11,129 +13,123 @@ import {
   Pressable,
   Image,
   Alert,
+  ImageBackground,
 } from "react-native";
+import Footer from "./Footer";
 
 export default function SignIn(props) {
   const dispatch = useDispatch();
-  const {login} = userActions;
+  const { login } = userActions;
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  async function entry () {
-      let res = dispatch(login(user))
-      console.log(res);
-     /*  if (res.payload.response.success){ */
-       /*  Alert.alert(`Welcome again ${res.payload.response.da.name}`) */
-        /* console.log(res.payload.response); */
-        /* .then(props.navigation.navigate("Home")); */
-
-    /*   } */
-/*       else {
-        res.payload.payload.map((message) => {
-          Alert.alert(`${message}`);
-        })
-      } */
+  async function entry() {
+    let res = await axios.post(`${base_url}auth/signin`, user);
+    console.log(user);
+    if (res.data.success) {
+      Alert.alert(`Welcome again ${res.data.response.user.name}`);
+      props.navigation.navigate("Home");
+    } else {
+      Alert.alert(`${res.data.message[0]} or password!`);
+    }
   }
+  const image = {
+    uri: "https://cdn.discordapp.com/attachments/1032383580590055512/1050556495424671864/fondo-signup.webp",
+  };
   return (
-    <>
-      <View style={styles.formSignUp}>
-        <Text style={styles.titulo}>Welcome to My-Tinerary!</Text>
-        <Text style={styles.textoLog}>Sign In with your account</Text>
+    <ImageBackground
+      source={image}
+      resizeMode="cover"
+      style={styles.imagefondo}
+    >
+      <View style={styles.containerImg}>
+        <Text style={styles.segundoTexto}>
+          <Text style={styles.lineOrange}>| </Text> Create your account
+        </Text>
         <TextInput
-          onChangeText={(newText) =>
-            setUser({ ...user, email: newText })
-          }
+          onChangeText={(newText) => setUser({ ...user, email: newText })}
           defaultValue={user.email}
           placeholder="E-Mail"
-          style={styles.inputSearch}
+          style={styles.textTitleTwo}
         />
         <TextInput
           secureTextEntry={true}
           autoCorrect={false}
-          onChangeText={(newText) =>
-            setUser({ ...user, password: newText })
-          }
+          onChangeText={(newText) => setUser({ ...user, password: newText })}
           defaultValue={user.password}
           placeholder="Password"
-          style={styles.inputSearch}
+          style={styles.textTitleTwo}
         />
-        <Pressable style={styles.botonColor} onPress={entry}>
-          <Text style={styles.fondoBoton}>Sign In</Text>
+        <Pressable style={styles.ButtonDetails} onPress={entry}>
+          <Text style={styles.textoBoton}>Sign In</Text>
         </Pressable>
-        <Text style={styles.textoLog2}>Or create a new account!</Text>
-      {/*   <Pressable
-          style={styles.botonColor}
-          onPress={() => props.navigation.navigate("Sign Up")}
+        <Text style={styles.segundoTexto}>
+          <Text style={styles.lineOrange}>|</Text> Or create a new account!
+        </Text>
+        <Pressable
+          style={styles.ButtonDetails}
+          onPress={() => props.navigation.navigate("SignUp")}
         >
-          <Text style={styles.fondoBoton}>Sign Up</Text>
-        </Pressable> */}
+          <Text style={styles.textoBoton}>Sign Up</Text>
+        </Pressable>
       </View>
-    </>
+      <Footer></Footer>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  signUp: {
-    height: "100%",
+  ButtonDetails: {
+    backgroundColor: "#ea5318",
     display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 250,
+    height: 40,
+    borderRadius: 10,
+    textAlign: "center",
   },
-  formSignUp: {
-    height: "88%",
-
+  textoBoton: {
+    color: "white",
+    fontWeight: "800",
+  },
+  segundoTexto: {
+    color: "white",
+    padding: 10,
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  imagefondo: {
+    height: "100%",
+    justifyContent: "center",
+    flex: 1,
+  },
+  containerImg: {
+    backgroundColor: "rgba(0,0,0,.606)",
+    width: "100%",
+    height: "95%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
-
-  textoLog: {
-    marginBottom: 5,
+  lineOrange: {
+    color: "#ea5318",
+    fontSize: 24,
   },
-
-  textoLog2: {
-    marginBottom: 5,
-    marginTop: 45,
-  },
-
-  inputSearch: {
-    height: 40,
-    width: 180,
-    backgroundColor: "white",
-    marginBottom: 10,
-    fontSize: 12,
-    justifyContent: "center",
-    textAlign: "center",
-    borderRadius: 4,
-  },
-
-  botonColor: {
-    backgroundColor: "#ff3648",
-    height: 40,
-    width: 180,
-    justifyContent: "center",
-    textAlign: "center",
-    borderRadius: 4,
-  },
-
-  fondoBoton: {
-    backgroundColor: "#ff3648",
-    height: 18,
-    width: 180,
-    justifyContent: "center",
-    textAlign: "center",
-    borderRadius: 4,
-    fontSize: 13,
-    color: "white",
-  },
-
-  logo: {
-    width: 120,
-    height: 120,
-  },
-
-  titulo: {
-    marginBottom: 20,
-    fontSize: 20,
+  textTitle: {
+    fontSize: 22,
     fontWeight: "bold",
+    padding: 10,
+  },
+  textTitleTwo: {
+    borderRadius: 8,
+    borderWidth: 1,
+    width: "70%",
+    borderColor: "#ea5318",
+    padding: 5,
+    fontSize: 15,
+    marginBottom: 10,
+    backgroundColor: "white",
   },
 });

@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import FormSignIn from "../components/FormSignIn";
+import Footer from "../components/Footer";
 
 export default function SignIn(props) {
   return (
@@ -20,7 +21,7 @@ export default function SignIn(props) {
 const styles = StyleSheet.create({
   ContainerDeSingUp:{
     color: "white",
-    height: 600,
+    height: "100%",
     width: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.596)",
     display: "flex",
@@ -28,9 +29,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   containerSingup: {
-    width: "80%",
+    width: "100%",
+    height:"100%",
     display: "flex",
     justifyContent: "center",
-    padding: 40,
   }
 })
