@@ -43,7 +43,7 @@ export default function DetailsHotel(props) {
         <View style={styles.containerCards}>
           <Image
             style={styles.cardImg}
-            source={{ uri: hotel.photo[0]}}
+            source={{ uri: hotel.photo}}
             key={hotel.id}
           />
           <View style={styles.containerDescription}>
