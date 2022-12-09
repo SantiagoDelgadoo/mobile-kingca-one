@@ -15,7 +15,6 @@ export default function Cities(props) {
     }, [text]);
     
   const image = { uri: "https://cdn.discordapp.com/attachments/1032383580590055512/1050147644737081374/img-header-mano.jpg" };
-  console.log(citiesFiltered);
   return (
     <ScrollView>
       <ImageBackground source={image} resizeMode="cover" style={styles.imagefondo}>

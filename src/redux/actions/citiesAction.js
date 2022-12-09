@@ -4,7 +4,7 @@ import { base_url } from "../../api/url";
 const getCities = createAsyncThunk ('getCities',async ({text})=>{ //uso assynkthunk para una accion que sea asincrona sino fuese asincrona uso createaction
     try {
         const res = await axios.get (`${base_url}city/?name=${text}`) //me guardo rta de axios con get
-        console.log(res.data.cities);
+
         return {
             listCities: res.data.cities //listcities va a ser un array
         }
@@ -16,7 +16,6 @@ const getCities = createAsyncThunk ('getCities',async ({text})=>{ //uso assynkth
 const allCities = createAsyncThunk ('allCities',async ()=>{  //uso assynkthunk para una accion que sea asincrona sino fuese asincrona uso createaction
     try {
         const res = await axios.get (`${base_url}city/`) //me guardo rta de axios con get
-        console.log(res.data.cities);
         return {
             listContinents: res.data.cities //de la 24 a la 26 es mi payload, listcontinents va a ser un array
         }
@@ -26,7 +25,7 @@ const allCities = createAsyncThunk ('allCities',async ()=>{  //uso assynkthunk p
 
 })
 const getMyCities = createAsyncThunk  ('getMyCities',async (userId)=>{ //uso assynkthunk para una accion que sea asincrona sino fuese asincrona uso createaction
-    console.log(userId);
+
     const user = userId
     try {
         const res = await axios.get (`${base_url}/city/?userId=${user}`) //me guardo rta de axios con get
@@ -59,7 +58,7 @@ const editCity = createAsyncThunk ('editCity',async (data)=>{ //uso assynkthunk 
         const res = await axios.put(`${base_url}/city/${id}`,info, headers
 
         );
-        console.log(res.data);
+
         return {
             cityedit: res.data.id //aca estaria guardado el objeto que me llego para despues concatenarlo en el otro array
         }

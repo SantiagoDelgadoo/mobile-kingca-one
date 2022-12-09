@@ -4,8 +4,6 @@ import { base_url } from "../../api/url";
 
 const reactions = createAsyncThunk("reactionOfTinerary", async (data) => {
     const { token, id } = data;
-    console.log(token);
-    /* console.log(id); */
     let headers = { headers: { Authorization: `Bearer ${token}` } };
 
     try {
@@ -30,15 +28,12 @@ const likeDislike = createAsyncThunk("likeDislike", async (data) => {
     let headers = { headers: { Authorization: `Bearer ${token}` } };
 
     try {
-        console.log(id);
-        console.log(name);
-        console.log('try');
         const respuesta = await axios.put(
             `${base_url}reaction/?itineraryid=${id}&name=${name}`,
             null,
             headers
         );
-        console.log(respuesta);
+       
         return {
             success: true,
             reaction: respuesta.data.reaction,

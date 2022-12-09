@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet} from 'react-native';
 import Carousel from '../components/Carousel';
 import { ImageBackground } from 'react-native';
+import Footer from '../components/Footer';
 export default function Home() {
     const image = { uri: "https://cdn.discordapp.com/attachments/1019318586361249852/1050131535422046268/img-itinerario.webp" };
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       </View>
     </ImageBackground>
       <Carousel/>
+      <Footer></Footer>
     </ScrollView>
   )
 }
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
         textAlign:"center",
     },
     containerGrande:{
-        backgroundColor:"rgba(15, 14, 14, 0.949)"
+        backgroundColor:"white"
       },
 
       imagefondo: {

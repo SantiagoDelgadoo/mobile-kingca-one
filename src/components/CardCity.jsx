@@ -3,7 +3,6 @@ import { Button, View, Image, Text, StyleSheet } from "react-native";
 
 export default function CardCity(props) {
   let cities = props.cities;
-  console.log(cities);
   return (
     <View style={styles.card} >
       <View>

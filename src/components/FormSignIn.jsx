@@ -26,14 +26,13 @@ export default function SignIn(props) {
     password: "",
   });
   async function entry() {
-    let res = await axios.post(`${base_url}auth/signin`, user);
-    console.log(user);
-    if (res.data.success) {
-      Alert.alert(`Welcome again ${res.data.response.user.name}`);
+    let res = await dispatch(login(user));
+      if (res.payload.success) {
+      Alert.alert(`Welcome again  ${res.payload.response.response.user.name}`);
       props.navigation.navigate("Home");
     } else {
       Alert.alert(`${res.data.message[0]} or password!`);
-    }
+    } 
   }
   const image =newcity;
   return (

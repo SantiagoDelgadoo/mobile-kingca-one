@@ -31,7 +31,6 @@ const editShowUser = createAsyncThunk("editShowUser", async (data) => {
 
 const createShowUser = createAsyncThunk("createShowUser", async (data) => {
   try {
-    console.log(data);
     const res = await axios.post(`${base_url}show/`, data);
     return {
       createShow: res.data.id,

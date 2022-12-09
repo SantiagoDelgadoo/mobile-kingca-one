@@ -30,7 +30,7 @@ const deleteItineraries = createAsyncThunk ('deleteItineraries',async (data)=>{ 
 const createItineraries = createAsyncThunk ('createItineraries',async (data)=>{ //uso assynkthunk para una accion que sea asincrona sino fuese asincrona uso createaction
     try {
         const res = await axios.post(`${base_url}itinerary`,data) //me guardo rta de axios que seria el objeto borrado
-        console.log(res);
+        
         return {
             itineriescreated: res.data.id //aca guardo este objeto para dsp borrarlo del array
         }
@@ -45,7 +45,7 @@ const editItineraries = createAsyncThunk ('editItineraries',async (data)=>{ //us
     try {
         const res = await axios.put(`${base_url}/itinerary/${id}`,(info), headers //me guardo la rta de axios que seria el objeto editado
         );
-        console.log(res.data);
+      
         return {
             itineriesedit: res.data.itineraryEdit //aca estaria guardado el objeto que me llego para despues concatenarlo en el otro array
         }
