@@ -12,10 +12,10 @@ const getComments = createAsyncThunk("getComments", async (id) => {
 });
 const createComment = createAsyncThunk("createComment", async (data) => {
     try {
-      console.log(data);    
+        
       let headers = { headers: { Authorization: `Bearer ${data.token}` } };
       const res = await axios.post(`${base_url}comments/`, data.data,headers);
-      console.log(res.data);
+    
       return {
         listComment: res.data.comment,
       };
@@ -28,7 +28,7 @@ const createComment = createAsyncThunk("createComment", async (data) => {
     const token= data.token;
     let headers = { headers: { Authorization: `Bearer ${token}` } };
     const res = await axios.delete(`${base_url}comments/${id}`,headers);
-    console.log(res.data);
+    
     return {
        
         deleteComments: res.data.id,

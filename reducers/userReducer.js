@@ -54,7 +54,6 @@ const userReducer = createReducer(initialState, (builder) => {
         token: "",
         role: "",
       } 
-      console.log("soy un console log");
       return newState
     } else {
       let newState = {
@@ -89,10 +88,8 @@ const userReducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(getUser.fulfilled, (state, action) => {
     const { response } = action.payload;
-    console.log(response);
     if (response.success) {
       let { data } = response;
-      console.log(data);
       let newState = {
         ...state,
         id: data._id,
@@ -116,7 +113,6 @@ const userReducer = createReducer(initialState, (builder) => {
   builder.addCase(editUser.fulfilled, (state, action) => {
     const { editUser } = action.payload;
     let data = editUser;
-    console.log(data);
     let newState = {
       ...state,
       id: data._id,

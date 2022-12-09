@@ -4,17 +4,34 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from '../components/Footer'
 import { ScrollView } from 'react-native-gesture-handler';
 import userActions from '../redux/actions/userActions'
+import FormProfile from '../components/FormProfile'
 
 export default function Profile() {
-    let { name, lastName, user, logged, id, role, photo, token } =
-        useSelector((store) => store.userReducer)
-    const dispatch = useDispatch()
+    let { name, lname, user, logged, id, role, photo, token , age,email} =
+    useSelector((store) => store.userReducer)
+
+    const { reIngress } = userActions;
+    const dispatch = useDispatch();
+    async function getToken() {
+      try {
+        let token = await AsyncStorage.getItem("token");
+        token = JSON.parse(token);
+        if (token) {
+          dispatch(reIngress(token.token.user));
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    React.useEffect(() => {
+      getToken();
+    }, []);
     const { Logout, getUser } = userActions
     useEffect(() => {
         dispatch(getUser(id))
     }, []
     )
-    console.log(name, lastName, token);
+    console.log(id);
     const desconect = async () => {
         await dispatch(Logout(token))
         Alert.alert('Bye, see you later')
@@ -22,25 +39,37 @@ export default function Profile() {
     return (
         <ScrollView>
             <View style={styles.containerProfile}>
-                <Text style={styles.textoUno}>Hello Santiago{name}</Text>
+                <Text style={styles.textoUno}>Hello {name}</Text>
                 <Image
                     style={styles.imageUser}
                     source={{
-                        uri: `https://www.clarin.com/img/2021/12/03/scaloni-volvio-a-subir-un___XAUV0IDDy_2000x1500__1.jpg`,
+                        uri: `${photo}`,
                     }}
                 />
                 <View style={styles.containerTextProfile}>
-                    <Text style={styles.textProfile}>Name: Santiago</Text>
-                    <Text style={styles.textProfile}>LastName: Delgado</Text>
-                    <Text style={styles.textProfile}>Age: 19</Text>
-                    <Text style={styles.textProfile}>Email: csssss@hotmail.com</Text>
+                    <Text>
+                    <Text style={styles.textCapacity}>Name: </Text>{name}
+                    </Text>
+                    <Text>
+                    <Text style={styles.textCapacity}>LastName: </Text>{lname}
+                    </Text>
+                    <Text>
+                    <Text style={styles.textCapacity}>Age: </Text>{age}
+                    </Text>
+                    <Text>
+                    <Text style={styles.textCapacity}>Email: </Text>{email}
+                    </Text>
                 </View>
             </View>
+            <FormProfile></FormProfile>
             <Footer></Footer>
         </ScrollView>
     )
 }
 const styles = StyleSheet.create({
+    textCapacity: {
+        fontWeight: "800",
+      },
     containerProfile: {
         height: 595,
         display: 'flex',

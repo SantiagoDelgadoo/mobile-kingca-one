@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import userActions from "../actions/userActions";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const { login, reIngress, getUser, editUser, Logout } = userActions;
 
 const initialState = {
@@ -20,7 +20,14 @@ const userReducer = createReducer(initialState, (builder) => {
     const { response } = action.payload;
     if (response.success) {
       let { user, token } = response.response;
-      localStorage.setItem("token", JSON.stringify({ token: { user: token } }));
+      async function setToken() {
+        try {
+          await AsyncStorage.setItem("token", JSON.stringify({ token: { user: token } }));
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+      setToken();
       let newState = {
         ...state,
         id: user.id,
@@ -45,6 +52,14 @@ const userReducer = createReducer(initialState, (builder) => {
   builder.addCase(Logout.fulfilled, (state, action) => {
     const { success } = action.payload;
     if (success) {
+      async function removeToken() {
+        try {
+          await AsyncStorage.removeItem('token');
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+      removeToken();
       localStorage.removeItem('token');
       let newState = {...state,
         id: "",
@@ -54,7 +69,6 @@ const userReducer = createReducer(initialState, (builder) => {
         token: "",
         role: "",
       } 
-      console.log("soy un console log");
       return newState
     } else {
       let newState = {
@@ -89,10 +103,8 @@ const userReducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(getUser.fulfilled, (state, action) => {
     const { response } = action.payload;
-    console.log(response);
     if (response.success) {
       let { data } = response;
-      console.log(data);
       let newState = {
         ...state,
         id: data._id,
@@ -116,8 +128,7 @@ const userReducer = createReducer(initialState, (builder) => {
   builder.addCase(editUser.fulfilled, (state, action) => {
     const { editUser } = action.payload;
     let data = editUser;
-    console.log(data);
-    let newState = {
+      let newState = {
       ...state,
       id: data._id,
       name: data.name,
