@@ -10,6 +10,8 @@ import SignUp from "../screen/SignUp";
 import Profile from "../screen/Profile";
 import userActions from "../redux/actions/userActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import MyReactions from "../screen/MyReactions";
+
 
 const DrawerNav = createDrawerNavigator();
 
@@ -40,6 +42,7 @@ export default function Drawer() {
       {!logged? (<DrawerNav.Screen name="SignIn" component={SignIn}/>):null}
       {!logged? (<DrawerNav.Screen name="SignUp" component={SignUp} />):null}
       {logged?  (<DrawerNav.Screen name="Profile" component={Profile} />):null}
+      {logged?  (<DrawerNav.Screen name="MyReactions" component={MyReactions} />):null}
     </DrawerNav.Navigator>
   );
 }
