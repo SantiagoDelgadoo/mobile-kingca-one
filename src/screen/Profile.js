@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import { ScrollView } from 'react-native-gesture-handler';
 import userActions from '../redux/actions/userActions'
 import FormProfile from '../components/FormProfile'
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Profile() {
     let { name, lname, user, logged, id, role, photo, token, age, email } =
         useSelector((store) => store.userReducer)
