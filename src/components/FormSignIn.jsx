@@ -16,6 +16,7 @@ import {
   ImageBackground,
 } from "react-native";
 import Footer from "./Footer";
+import newcity from "../../assets/new-city.jpg"
 
 export default function SignIn(props) {
   const dispatch = useDispatch();
@@ -34,9 +35,7 @@ export default function SignIn(props) {
       Alert.alert(`${res.data.message[0]} or password!`);
     }
   }
-  const image = {
-    uri: "https://cdn.discordapp.com/attachments/1032383580590055512/1050556495424671864/fondo-signup.webp",
-  };
+  const image =newcity;
   return (
     <ImageBackground
       source={image}
