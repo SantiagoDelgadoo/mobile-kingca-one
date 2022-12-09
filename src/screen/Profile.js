@@ -47,16 +47,16 @@ export default function Profile() {
                     }}
                 />
                 <View style={styles.containerTextProfile}>
-                    <Text>
+                    <Text style={styles.textDescription}>
                         <Text style={styles.textCapacity}>Name: </Text>{name}
                     </Text>
-                    <Text>
+                    <Text style={styles.textDescription}>
                         <Text style={styles.textCapacity}>LastName: </Text>{lname}
                     </Text>
-                    <Text>
+                    <Text style={styles.textDescription}>
                         <Text style={styles.textCapacity}>Age: </Text>{age}
                     </Text>
-                    <Text>
+                    <Text style={styles.textDescription}>
                         <Text style={styles.textCapacity}>Email: </Text>{email}
                     </Text>
                 </View>
@@ -70,6 +70,9 @@ export default function Profile() {
     )
 }
 const styles = StyleSheet.create({
+    textDescription: {
+        width: 300,
+      },
     ButtonDetails: {
         backgroundColor: "#ea5318",
         display: "flex",
