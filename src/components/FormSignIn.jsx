@@ -43,7 +43,7 @@ export default function SignIn(props) {
     >
       <View style={styles.containerImg}>
         <Text style={styles.segundoTexto}>
-          <Text style={styles.lineOrange}>| </Text> Create your account
+          <Text style={styles.lineOrange}>| </Text> Enter your account
         </Text>
         <TextInput
           onChangeText={(newText) => setUser({ ...user, email: newText })}
